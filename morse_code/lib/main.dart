@@ -17,6 +17,7 @@ class _HomeState extends State<Home> {
   final _text = TextEditingController();
   String userInput = '';
   String morseCode = '';
+  String display = 'Enter the Word to convert';
   final Morse morse = new Morse();
   @override
   Widget build(BuildContext context) {
@@ -27,6 +28,16 @@ class _HomeState extends State<Home> {
           crossAxisAlignment: CrossAxisAlignment.end,
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
+            SizedBox(
+              height: 100,
+            ),
+            Text(
+              display,
+              style: TextStyle(
+                fontSize: 30
+                fontFamily: 'Montserrat',
+                ),
+            ),
             Expanded(
               child: Container(
                 child: Center(
@@ -40,7 +51,15 @@ class _HomeState extends State<Home> {
             TextField(
               controller: _text,
               decoration: InputDecoration(
-                  hintText: "Enter the Word", border: OutlineInputBorder()),
+                hintText: "Enter the Word",
+                border: OutlineInputBorder(),
+                suffixIcon: IconButton(
+                  onPressed: () {
+                    _text.clear();
+                  },
+                  icon: const Icon(Icons.clear),
+                ),
+              ),
             ),
             SizedBox(
               height: 50,
@@ -51,6 +70,7 @@ class _HomeState extends State<Home> {
                 MaterialButton(
                   onPressed: () {
                     setState(() {
+                      display = "Morse Code is";
                       userInput = _text.text;
                       morseCode = morse.encode(userInput);
                     });
@@ -59,16 +79,19 @@ class _HomeState extends State<Home> {
                   color: Colors.teal[100],
                 ),
                 MaterialButton(
-                  onPressed: () {
+                  onPressed: () async {
                     for (var i = 0; i < morseCode.length; i++) {
                       userInput = _text.text;
                       morseCode = morse.encode(userInput);
                       if (morseCode[i] == '-') {
                         _turnOnFlash(context);
+                        await Future.delayed(const Duration(seconds: 1), () {});
                       } else if (morseCode[i] == '.') {
                         _turnOffFlash(context);
+                        await Future.delayed(const Duration(seconds: 1), () {});
                       }
                     }
+                    _turnOffFlash(context);
                   },
                   child: Text("Flash"),
                   color: Colors.teal[100],
