@@ -29,7 +29,7 @@ morse: ^0.1.4+1
 Install the apk
 
 ## How to Run
-give the word to convert on textfield
-press convert for conversion and flash for flashing
+1.give the word to convert on textfield
+2.press convert then flash for flashing
 # Link to apk
 https://drive.google.com/drive/folders/1akPVGBDsaz6sNnBB3JsaH4oZp3R16ynz?usp=sharing
