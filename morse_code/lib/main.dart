@@ -4,6 +4,7 @@ import 'package:morse/morse.dart';
 import 'package:torch_light/torch_light.dart';
 
 void main() => runApp(MaterialApp(
+      debugShowCheckedModeBanner: false,
       home: Home(),
     ));
 
@@ -33,10 +34,10 @@ class _HomeState extends State<Home> {
             ),
             Text(
               display,
-              style: TextStyle(
-                fontSize: 30
+              style: const TextStyle(
+                fontSize: 30,
                 fontFamily: 'Montserrat',
-                ),
+              ),
             ),
             Expanded(
               child: Container(
